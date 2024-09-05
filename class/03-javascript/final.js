@@ -70,7 +70,7 @@ function getTokenTimerConfirm(){
 
     document.getElementById("signup__button").style = "background-color: #FFFFFF; color: #0068FF; border: 1px solid #0068FF ;cursor: pointer;"
     document.getElementById("signup__button").removeAttribute("disabled")
-    
+
 }
 
 function signup(){
