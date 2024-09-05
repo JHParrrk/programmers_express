@@ -1,0 +1,301 @@
+const or let array = ["배열" , "배열2"]
+배열의 길이 구하기
+array.length
+배열의 값 꺼내기
+array[숫자(인덱스)]
+배열의 맨 뒤에 값 추가
+array.push()
+배열의 맨 마지막 값 삭제
+array.pop()
+배열 요소 정렬
+array.sort()
+배열 데이터 확인
+array.includes("값")
+배열 2개 연결
+array.concat(array2)
+배열을 문자로 만들기
+array.join()
+배열 분리
+array.slice()
+배열에서 원하는 요소 뽑기
+array.filter()
+배열의 모든 요소 변경
+array.map()
+값을 기준으로 배열을 분리
+array.split(“값”) 
++ 분리된 배열을 바로 꺼낼 수 있음 예시 let userMail = array.split(“값”)[0]
+
+-------------------------------------------------------------
+배열에 데이터 담기
+
+// 빈 배열
+const blanksArr = []                     // 아무것도 안담는 것도 가능
+
+// 숫자들로 이루어진 배열
+const numbers = [2, 10, 7, 3.3]       // 숫자 담기
+
+// 문자들로 이루어진 배열
+const classmates = ["코드", "캠프"]     // 문자 담기
+
+--
+배열의 메서드와 속성 - 기초
+
+// 배열 만들기
+const blanks = []                            // 비어있는 배열
+const numbers = [2, 10, 7, 3.3]              // 숫자들로 이루어진 배열
+const classmates = ["철수", "영희", "훈이"]     // 문자들로 이루어진 배열
+
+// 배열의 길이 구하기 _ length
+classmates.length          // 3
+
+// 배열의 값 꺼내기
+classmates[0]              // "철수"
+classmates[1]              // "영희"
+
+// 배열의 맨 뒤에 추가하기 _ push
+classmates.push("민지")     // ["철수", "영희", "훈이", "민지"]
+
+// 배열의 맨 마지막 삭제하기 _ pop
+classmates.pop()          // ["철수", "영희", "훈이"]
+
+// 배열의 요소 정렬하기, 거꾸로 뒤집기 _ sort
+classmates.sort()               // ["영희", "철수", "훈이"]
+
+// 배열이 가지고있는 데이터 확인하기 _ includes
+classmates.includes("철수")     // true
+classmates.includes("영구")     // false
+
+-------------------------------------------------------------
+배열의 메서드와 속성 - 중급
+
+const classmates1 = ["철수", "영희", "훈이"]
+const classmates2 = ["민지", "민수"]
+
+// 배열 2개 연결하기 _ concat
+classmates1.concat(classmates2**)     // ["철수", "영희", "훈이", "민지", "민수"]
+
+// 배열을 문자로 만들기 _ join
+classmates.join(', ')     // 철수, 영희, 훈이
+classmates.join("와 ")    // 철수와 영희와 훈이
+
+// 배열 분리하기 _ splice
+const classmates = ["철수", "영희", "훈이"]
+classmates.splice(0, 1)     // ["철수"]
+
+// 배열에서 원하는 요소만 뽑아내기 _ filter
+classmates.filter((data) => (data === "영희"))     // ["영희"]
+classmates.filter((data) => (data !== "영희"))     // ["철수", "훈이"]
+
+// 배열에서 모든 요소 변경하기 _ map
+classmates.map((data) => (data + "어린이"))         // ["철수어린이", "영희어린이", "훈이어린이"]
+
+-------------------------------------------------------------
+배열 예제
+
+// class/03-javascript/
+
+const classmate = ["은정","혜원","재훈","예봄","정훈"]
+
+classmate[0]
+// 결과 은정
+classmate[1]
+// 결과 혜원
+classmate[2]
+// 결과 재훈
+classmate[3]
+// 결과 예봄
+classmate[4]
+// 결과 정훈
+
+// 없는 데이터 위치를 끄집어내보겠습니다.
+classmate[5]
+// 결과 undefined
+
+// "다슬" 이라는 데이터를 포함하고 있는지 확인해보겠습니다.
+classmate.includes("다슬")
+// 결과 false
+
+//"다슬"이라는 데이터를 추가해보겠습니다.
+classmate.push("다슬")
+// 결과 ["은정","혜원","재훈","예봄","정훈","다슬"]
+
+//"다슬"이라는 데이터를 빼보겠습니다.
+classmate.pop()
+// 결과 ["은정","혜원","재훈","예봄","정훈"]
+
+//classmate의 길이를 구해보겠습니다.
+classmate.length
+//결과 5
+
+// 퀴즈 풀이
+let developer = ["워라벨","연봉","신분상승","성공","꿈"]
+developer[1]
+let dream = ["커리어","점프","할수있다"]
+developer.concat(dream)
+
+-------------------------------------------------------------
+문자열도 배열처럼 다룰 수 있다
+문자열의 메서드와 속성
+
+// 문자열(배열)
+const classmates1 = "철수"
+classmates1[0]     // "철"
+classmates1[1]     // "수"
+
+// 문자열 쪼개기
+const classmates2 = "철수&영희"
+classmates2.split("&")     // ["철수", "영희"]
+
+// 문자열 양쪽 공백 제거하기
+const classmates3 = " 철수 & Milk "
+classmates3.trim()     // "철수 & Milk"
+
+// 문자열 대소문자 변환하기
+classmates3.toUpperCase()     // "철수 & MILK"
+classmates3.toLowerCase()     // "철수 & milk"
+
+// 문자열에 빈칸 채우기
+const chulsooNumber = "1234"
+chulsooNumber.padStart(10, "0")     // "0000001234"
+chulsooNumber.padEnd(10, "0")       // "1234000000"
+
+-------------------------------------------------------------
+문자열 다루기 예제 - 조회한 메일에 **** 표시하기
+
+let email = "codecamp@gmail.com"
+email.includes("@")
+email.split("@")
+// 결과 ["codecamp" , "gmail.com"]
+
+let userMail = email.slit("@")[0]   // "codecamp"
+let company = email.slit("@")[1]    // "gmail.com"
+
+// userMail을 한글자씩 넣어주기 위한 빈배열
+let maskingMail = []
+maskingMail.push(userMail[0])
+maskingMail.push(userMail[1])
+maskingMail.push(userMail[2])
+maskingMail.push(userMail[3])
+maskingMail.push(*)
+maskingMail.push(*)
+maskingMail.push(*)
+maskingMail.push(*)
+
+// maskingMail = ["c","o","d","e","*","*","*","*"]
+let emailMasking = maskingMain.join("")+"@"+company
+
+-------------------------------------------------------------
+객체
+// 객체 선언하기
+const classmate = {
+	name: "철수",
+	age: 8,
+  school: "꽃샘초등학교"
+}
+
+// 객체의 값 꺼내기
+classmate.name        // 철수
+classmate['name']     // 철수
+
+// 객체의 키&값 삭제하기
+delete classmate.name
+classmate = {
+	age:8,
+	school: "꽃샘초등학교"
+}
+
+-------------------------------------------------------------
+객체와 배열 함께쓰기
+
+// 객체들을 배열에 담아서 선언하기
+const classmates = [
+    {
+        name: "철수",  // 1번째 객체
+        age: 8,
+        school: "다람쥐초등학교"
+    },
+    {
+        name: "영희",  // 2번째 객체
+        age: 8,
+        school: "다람쥐초등학교"
+    },
+    {
+        name: "훈이",  // 3번째 객체
+        age: 7,
+        school: "토끼초등학교"
+    }
+]
+
+// 위 객체들을 깔끔하게 한줄로 적기
+const classmates = [
+    { name: "철수", age: 8, school: "다람쥐초등학교" },
+    { name: "영희", age: 8, school: "다람쥐초등학교" },
+    { name: "훈이", age: 7, school: "토끼초등학교" }
+]
+
+// 배열안의 객체에서 뽑아내기
+classmates[0].name     // 철수
+classmates[0].age      // 8
+classmates[0].school   // 다람쥐초등학교
+
+// 배열 안의 객체에서 원하는 객체(8살 이상)만 뽑아내기
+classmates.filter((data) => (data.age >= 8))
+
+    // classmates = [
+    //    { name: "철수", age: 8, school: "다람쥐초등학교" },
+    //    { name: "영희", age: 8, school: "다람쥐초등학교" },
+    // ]
+
+-----------------------------------------------------------
+### alert
+//메세지를 지정할 수 있는 **경고 대화 상자**를 띄웁니다.
+//alert 만들어보기 _ 콘솔에서 해보세요!
+alert("이렇게 만드시면 경고창이 생겨요!")
+-----------------------------------------------------------
+setTimeout
+시간 지연함수로 입력 시간이 만료된 후 함수나 지정함 코드를 실행합니다.
+setTimeout(기능, 시간) // 기능은 함수이고, 시간은 밀리세컨드 단위입니다. ex 3000
+-----------------------------------------------------------
+setInterval
+시간 반복함수로 입력한 시간마다 함수를 반복적으로 호출하거나 코드를 실행합니다.
+setInterval(기능, 시간)         // 기능은 함수이고, 시간은 밀리세컨드 단위입니다.
+-----------------------------------------------------------
+예제
+// setTimeout 예제
+console.log("로딩을 시작합니다.")
+setTimeout(function(){
+		console.log("로딩 완료.")                        // 로딩을 시작합니다.
+}, 3000)                                           // 로딩 완료.
+
+// setInterval 예제
+setInterval(function(){
+		const now = new Date()
+		const minutes = now.getMinutes()
+		const seconds = now.getSeconds()
+
+		console.log(minutes + "분" + seconds + "초")         // 16분 11초
+                                                        // 16분 12초
+}, 1000)                                                // 16분 13초
+                                                        // 16분 14초
+-----------------------------------------------------------
+인증번호
+let timer = 180
+setInterval(function(){
+    if(timer >= 0) {
+		const minutes = Math.floor(timer / 60)
+		const seconds = String(timer - minutes * 60).padStart(2, "0")
+		console.log(minutes + ":" + seconds)
+        timer = timer - 1;
+    }
+}, 1000)
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
