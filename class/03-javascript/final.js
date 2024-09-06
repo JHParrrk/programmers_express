@@ -38,7 +38,7 @@ function getToken(){
 }
 
 let interval;
-function getTokenTimer(){
+function getTokenTimer() {
     let timer = 10
     interval = setInterval(() => {
         if(timer >= 0){
@@ -61,7 +61,7 @@ function getTokenTimer(){
     }, 1000)
 }
 
-function getTokenTimerConfirm(){
+function getTokenTimerConfirm() {
     clearInterval(interval)
     document.getElementById("token__timer__confirm__button").style = "background-color: #FFFFFF; cursor: default;"
     document.getElementById("token__timer__confirm__button").setAttribute("disabled", "true")
@@ -73,7 +73,7 @@ function getTokenTimerConfirm(){
 
 }
 
-function signup(){
+function signup() {
     const email = document.getElementById("email").value
     const writer = document.getElementById("writer").value
     const password1 = document.getElementById("password1").value

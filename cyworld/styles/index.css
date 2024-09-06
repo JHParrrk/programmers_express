@@ -145,13 +145,13 @@
     padding: 0px 14px;
 }
 
+.right__header__title {
+    font-size: 16px;
+}
+
 .right__header__title, .right__header__setting {
     color: #55B2E4;
     font-size: 9px;
-}
-
-.right__header__title {
-    font-size: 16px;
 }
 
 .wrapper__right__body {
