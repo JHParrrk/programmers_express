@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>나만의 일기장!!</title>
-    <link rel="stylesheet" href="05-diary.css">
+    <link rel="stylesheet" href="./02-flexdiary.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <h1><a href="#none">HAGD</a></h1>
+            </div>
+            <div class="menu">
+                <ul class="menu__ul">
+                    <li>
+                        <a href="#none">어제의 일기</a>
+                    </li>
+                    <li>
+                        <a href="#none">오늘의 일기</a>
+                    </li>
+                    <li>
+                        <a href="#none">내일의 일기</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user">
+                <img src="../img/portrait.png" alt="유저 정보" width="32" height="32">
+            </div>
+        </div>
+    </header>
     <div class="container">
         <div class="wrapper">
             <div class="wrapper__head">
@@ -22,7 +48,7 @@
             <div class="wrapper__body">
                 <div class="wrapper__body__content">
                     <p class="diary-title">
-                        ✔ 쭈꾸미의 일기
+                        ? 쭈꾸미의 일기
                     </p>
                     <p>
                         오늘은 <span class="kimchi">김치찜</span>을 먹었다. <span class="egg">계란말이</span>도 함께 있는 세트였다.<br>

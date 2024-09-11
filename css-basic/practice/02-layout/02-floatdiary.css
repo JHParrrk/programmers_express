@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: #eeeeee;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.wrapper {
+    width: 620px;
+    padding: 40px 30px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.wrapper__head {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed gray;
+}
+
+.wrapper__head__title {
+    font-size: 32px;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.wrapper__head__sub-title {
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+#point {
+    color: orange;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 15px;
+    display: block;
+}
+
+.wrapper__body {
+    border: 1px solid #dddddd;
+    padding: 20px 30px;
+}
+
+.diary-title {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+}
+
+.kimchi {
+    color: red;
+    font-weight: 600;
+}
+
+.egg {
+    color: orange;
+    font-weight: 600;
+}
+
+.highlight {
+    font-size: 22px;
+    color: blue;
+    font-weight: 700;
+    font-style: italic;
+}
+
+.diary-date {
+    color: #919191;
+    font-size: 14px;
+    text-align: right;
+}
+
+.header {
+    border-bottom: 1px solid gray;
+}
+
+.header-inner {
+    width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    /* float 가운데 정렬 */
+}
+
+.logo {
+    float: left;
+    width: 100px;
+    height: 80px;
+    padding-top: 22px;
+}
+
+.logo h1 a {
+    text-decoration: none;
+    color: orange;
+}
+
+.menu {
+    float: left;
+    width: calc(100% - 200px);
+    /*  반드시 사칙연산자 양쪽에 공백 필수! */
+    /* menu width값 100%을 user logo width값 합쳐서 200을 빼주면 쉽게 알아서 해줌*/
+    height: 80px;
+    text-align: center;
+}
+
+.menu__ul {
+    display: inline-block;
+}
+
+.menu__ul li {
+    float: left;
+    list-style: none;
+}
+
+.menu__ul li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 29px 20px;
+}
+
+.menu__ul li a:hover {
+    color: orange
+}
+
+.user {
+    float: left;
+    width: 100px;
+    height: 80px;
+    padding-top: 23px;
+}
+
+.clearfix {
+    clear: both;
+}
