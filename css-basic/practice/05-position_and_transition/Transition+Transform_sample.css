@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .title {
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+    margin: 30px 0;
+  }
+  
+  .box {
+    width: 600px;
+    height: 120px;
+    margin: 0 auto;
+    background-image: linear-gradient(red, orange);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .box span {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .box .text1 {
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .box .text2 {
+    transition: all 0.4s ease-in-out 0.1s;
+  }
+  
+  .box .text3 {
+    transition: all 0.4s ease-in-out 0.2s;
+  }
+  
+  .box .text4 {
+    transition: all 0.4s ease-in-out 0.3s;
+  }
+  
+  .box .text5 {
+    transition: all 0.4s ease-in-out 0.4s;
+  }
+  
+  .box .text6 {
+    transition: all 0.4s ease-in-out 0.5s;
+  }
+  
+  .box .text7 {
+    transition: all 0.4s ease-in-out 0.6s;
+  }
+  
+  .box .text8 {
+    transition: all 0.4s ease-in-out 0.7s;
+  }
+  
+  .box .text9 {
+    transition: all 0.4s ease-in-out 0.8s;
+  }
+  
+  .box:hover span {
+    transform: translateY(-20px)
+  }

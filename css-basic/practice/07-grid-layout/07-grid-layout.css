@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr 2fr);
+    /* 이밑으로 쭉(열) 속성을 지정하기때문에 좌우를 결정 */
+    grid-template-rows: repeat(4, 100px);
+    /* 행 갯수를 정하기 때문에 상하를 결정 */
+    grid-gap: 5px;
+}
+
+.item {
+    border: 2px solid blue;
+}
+
+.item1 {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 4;
+    background: green;
+}
