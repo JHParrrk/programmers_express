@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>querySelector</title>
+    <script>
+        const dateFormMaker = function () {
+            const inPutYear = document.querySelector('#target-year-input').value;
+            const inPutMonth = document.querySelector('#target-month-input').value;
+            const inPutDate = document.querySelector('#target-date-input').value;
+
+            console.log(inPutYear, inPutMonth, inPutDate);
+        }
+        
+        const counterMake = function() {
+            const nowDate = new Date();
+            const targetDate = new Date('2025-04-09');
+            const remaining = (targetDate - nowDate) / 1000;
+            console.log(remaining)
+        }
+    </script>
+</head>
+<body>
+    <div id="target-selector id">
+        <input id="target-year-input" class="target-input" maxlength="4"/> -
+        <input id="target-month-input" class="target-input" maxlength="2"/> -
+        <input id="target-date-input" class="target-input" maxlength="2"/>
+    </div>
+    <button onclick="counterMake()">버튼</button>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>D-Day</title>
+    <link rel="stylesheet" href="./02-d-day.css" />
+    <script src="./02-d-day.js" defer></script>
+  </head>
+  <body>
+    <h1>D-Day</h1>
+    <div id="d-day-container">
+      <div class="d-day-child-container">
+        <span id="days">0</span>
+        <span>일</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="hours">0</span>
+        <span>시간</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="min">0</span>
+        <span>분</span>
+      </div>
+      <div class="d-day-child-container">
+        <span id="sec">0</span>
+        <span>초</span>
+      </div>
+    </div>
+    <div id="d-day-message"></div>
+    <div id="target-selector id">
+      <input
+        id="target-year-input"
+        class="target-input"
+        type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+        onchange="changeCal1()"
+        onkeyup="onchange()"
+        maxlength="4"
+      />
+      -
+      <input
+        id="target-month-input"
+        class="target-input"
+        type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+        onchange="changeCal2()"
+        onkeyup="onchange()"
+        maxlength="2"
+      />
+      -
+      <input
+        id="target-date-input"
+        class="target-input"
+        type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+        onchange="changeCal3()"
+        onkeyup="onchange()"
+        maxlength="2"
+      />
+    </div>
+    <button onclick="starter()" class="btn">카운트다운 시작</button>
+    <button onclick="resetTimer()" class="btn">타이머 초기화</button>
+  </body>
+</html>

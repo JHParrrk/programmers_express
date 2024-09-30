@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");* {
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+* {
   box-sizing: border-box;
   font-family: "Noto Sans KR", "돋움", sans-serif;
 }
@@ -231,7 +232,6 @@ a {
     transform: translateY(0);
   }
 }
-
 @media screen and (max-width: 767px) {
   .container {
     grid-template-rows: repeat(3, auto);
