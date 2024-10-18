@@ -1,5 +1,5 @@
-const messageContainer = document.querySelector("#d-day-message");
 const container = document.querySelector("#d-day-container");
+const messageContainer = document.querySelector("#d-day-message");
 const savedDate = localStorage.getItem("saved-date");
 
 const intervalIdArr = [];
@@ -17,8 +17,12 @@ const dateFormMaker = function () {
 };
 
 const counterMaker = function (data) {
+  //targetDateInput 들어옴
   if (data !== savedDate) {
+    // 같지 않다면 targetDateInput에 새로운 데이터를 저장
     localStorage.setItem("saved-date", data);
+    // localStorage.setItem("saved-date", data);
+    // saved-date라는 키로 저장 data(targetDateInput)는 밸류
   }
   const nowDate = new Date();
   const targetDate = new Date(data).setHours(0, 0, 0, 0);
@@ -54,9 +58,11 @@ const counterMaker = function (data) {
   const timeKeys = Object.keys(remainingObj);
 
   const format = function (time) {
+    // 10 이하의 수가 나왔을때 앞에 0을 붙여주는 함수
     if (time < 10) {
       return "0" + time;
     } else {
+      //한자릿수가 아니라면 그대로 반환
       return time;
     }
   };
@@ -67,26 +73,46 @@ const counterMaker = function (data) {
     document.getElementById(tag).textContent = remainingTime;
     i++;
   }
+
+  // for (let tag of Arr) {
+  // const remainingTime = format(remainingObj[arrkeys[i]]);
+  // document.getElementById(tag).textContent = remainingTime;
+  // documentArr의 태그 즉 ["days", "hours", "min", "sec"]에 넣어주기
+  // i++;
+  // for (let tag of documentArr) {
+  // for (let key in documentArr)
+  //   i++;
+  // }
 };
 
 const starter = function (targetDateInput) {
+  // 세이브데이터가 있으면 그냥 들어가면 되는데
   if (!targetDateInput) {
+    // 세이브데이터가 없으면 targetDateInput에 날짜id값밸류넣어서 새로만들어 넣어줌
     targetDateInput = dateFormMaker();
   }
   container.style.display = "flex";
   messageContainer.style.display = "none";
   setClearInterval();
+  //이거 없으면 여러개의 인터벌(날짜)가 안없어셔저서 여러개 돌아감
   counterMaker(targetDateInput);
+  // 셋인터벌은 실행할때까지 1초 걸려서 1초 기다리기 전에 한번 더 실행해주는것
   const intervalId = setInterval(() => {
     counterMaker(targetDateInput);
   }, 1000);
+  // 자체내장함수 1000은 밀리세컨드 초로는 1초임
+  // const intervalId = setInterval(() => {함수()}, 1000);
+  // ? 함수자체를 넣어주는게 아니라 함수를 실행하게되면 ()=> 넣어주어야함
+  // 1초 뒤에 1초마다 함수를 반복실행해주어라
   intervalIdArr.push(intervalId);
+  // 인터벌 순서가 들어감 예를들어 시작버튼 한번은 1번쨰 인터벌 두번쨰는 2번째인터벌
 };
 
 const setClearInterval = function () {
   for (let i = 0; i < intervalIdArr.length; i++) {
     clearInterval(intervalIdArr[i]);
   }
+  // 존재하는 모든 인터벌 순서를 모두 확인하고 종료
 };
 
 const resetTimer = function () {
@@ -94,6 +120,7 @@ const resetTimer = function () {
   messageContainer.innerHTML = "<h3>D-Day를 입력해 주세요.</h3>";
   messageContainer.style.display = "flex";
   localStorage.removeItem("saved-date");
+  // 로컬스토리지 삭제
   document.getElementById("target-year-input").value = null;
   document.getElementById("target-month-input").value = null;
   document.getElementById("target-date-input").value = null;
@@ -102,6 +129,7 @@ const resetTimer = function () {
 
 if (savedDate) {
   starter(savedDate);
+  //세이브 데이터있으면 그거 보여줌
 } else {
   container.style.display = "none";
   messageContainer.innerHTML = "<h3>D-Day를 입력해 주세요.</h3>";
@@ -124,8 +152,7 @@ const changeCal2 = function () {
   }
   if (month > 12) {
     document.getElementById("target-month-input").value = "12";
-  }
-  if (month === "00") {
+  } else if (month === "00") {
     document.getElementById("target-month-input").value = "01";
   }
 };
@@ -135,9 +162,11 @@ const changeCal3 = function () {
   const month = document.getElementById("target-month-input").value;
   const day = document.getElementById("target-date-input").value;
   if (!((year % 4 === 0 && year % 100 != 0) || year % 400 === 0)) {
-    if (day > 28) {
+    if (month == 2 && day > 28) {
       alert(year + "년은 평년이라 29일이 없음");
       document.getElementById("target-date-input").value = "28";
+      // 월먼저 조건식 만들고 그 안에 29일 30일 만들면 될듯
+      // 현재문제 평년때는 2월 30일이 입력이 되어버림
     }
   }
   if (day == "00") {
