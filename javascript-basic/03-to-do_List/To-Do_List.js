@@ -40,8 +40,19 @@ const createTodo = function (storageData) {
     saveItemsFn();
   });
   // 더블클릭하면 삭제
+  // 콜백함수 함수를 등록하기만 하고 어떤 이벤트가 발생했거나
+  // 특정 시점에 도달했을 때 시스템에서 호출하는 함수
 
   if (storageData?.complete) {
+    // = (storageData && storageData.complete)
+    // 옵셔널체이닝
+    // 새로 인풋 데이터를 입력할 떄 인풋데이터에는 storageData가 undefined거나 null이어서
+    // 매개변수를 받아오지 않게 된다. undefined인 값에 complete를 시도를 하려고 하니까
+    // 에러를 뱉어낸다. 여기서 사용하는 것이 옵셔널체이닝 뒤에다가 물음표 하나를 붙이게
+    // 되면 이 스토리지 객체가 undefined이거나 다른 값인 경우에는 뒤에 complete를
+    // 참조하려고 시도하지 않는다.
+    // storageData의 complete라는 키를 가진 프로퍼티 확인
+    // 프로퍼티 값이 true라면
     newLi.classList.add("complete");
   }
 
@@ -61,6 +72,8 @@ const createTodo = function (storageData) {
 
 const keyCodeCheck = function () {
   if (window.event.keyCode === 13 && todoInput.value.trim() !== "") {
+    // trim()은 문자열의 양쪽 공백을 없애준다. 이것을 안쓸 경우 스페이스바를 누른다 같은
+    // 입력값을 넣었을때 추가되어버리는데 이러한 경우를 방지
     createTodo();
   }
 };
@@ -86,12 +99,15 @@ const saveItemsFn = function () {
       // complete의 존재 유무를 체크하고 저장하는 과정
     };
     // 배열 안에 객체 추가
+    // 만약 deleteAll해서 li태그가 없으면 빈배열이 추가가 된다 이를 밑에서 처리한다
     saveItems.push(todoObj);
   }
 
-  saveItems.length === 0
-    ? localStorage.removeItem("saved-items")
-    : localStorage.setItem("saved-items", JSON.stringify(saveItems));
+  saveItems.length === 0 //조건식
+    ? localStorage.removeItem("saved-items") // true조건식
+    : localStorage.setItem("saved-items", JSON.stringify(saveItems)); // false조건식
+  // 빈 배열(필요없는 데이터) 삭제 해주는것
+  // saveItems의 길이가 0이라면 saved-items라는 프로퍼티를 삭제해주겠다.
   // 로컬스토리지에는 문자열만 저장이 된다. JSON.stringify(saveItems) 이걸로 문자열로 저장
   // 배열은 문자열로 저장이 불가 그냥 String()으로는 안된다는 말
   // JSON 문자텍스트형 데이터 포멧
@@ -113,15 +129,20 @@ const weatherDataActive = function ({ location, weather }) {
     "Thunderstorm",
   ];
   weather = weatherMainList.includes(weather) ? weather : "Fog";
+  // weather로 들어온 데이터 체크 true면 weather로 그대로 할당 false라면 "Fog"로 할당
   const locationNameTag = document.querySelector("#location-name-tag");
 
   locationNameTag.textContent = location;
+  // 이거 켜는 위치로 대문 이름 바꾸기
   document.body.style.backgroundImage = `url('./images/${weather}.jpg')`;
+  // 날씨에 따라 그림 바꾸기
 
   if (
     !savedWeatherData ||
     savedWeatherData?.location !== location ||
     savedWeatherData?.weather !== weather
+    //옵셔널체인지 savedWeatherData 자체가 존재하지 않을때 뒤에 참조하려고 시도X
+    // savedWeatherData가 없으면, location이 다르다면, weather가 다르다면
   ) {
     localStorage.setItem(
       "saved-weather",
@@ -131,16 +152,23 @@ const weatherDataActive = function ({ location, weather }) {
 };
 
 const weatherSearch = function ({ latitude, longitude }) {
+  // 매개변수 구조분해할당
   fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid={API Key}`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=cae546a99b63035eb475b65b1f7a0468`
   )
+    // 비동기 처리
     .then((res) => {
+      //Fulfilled 상태일때 then을 실행한다
       return res.json();
+      // header가 존재하는 응답 객체를 받으려면 이렇게 받아야한다.
+      // console.log(res)로 받으면 오류
+      // then에서 return을 받으면 또다시 then을 붙여 쓸 수 있다.
     })
     .then((json) => {
       const weatherData = {
         location: json.name,
         weather: json.weather[0].main,
+        // console.log(json.name), console.log(son.weather[0].main)
       };
       weatherDataActive(weatherData);
     })
@@ -150,12 +178,19 @@ const weatherSearch = function ({ latitude, longitude }) {
 };
 
 const accessToGeo = function ({ coords }) {
+  // 구조분해할당 함수의 매개변수로도 활용가능
+  // 소괄호 안에 중괄호 넣어주면 position.coords를 바로 뽑아와서 매개변수로 사용할수있음
   const { latitude, longitude } = coords;
-  // shorthand property
+  // 구조분해할당 const { name, gender } = obj; 같이
+  // coords 쿠어디에스라 부르네 현재 위치, 위도 경도가 담겨져 있다
+  // shorthand(속기) property
   const positionObj = {
-    latitude,
-    longitude,
+    // shorthand property
+    latitude, // 위도 latitude: latitude
+    longitude, // 경도 longitude: longitude
   };
+  // console.log(latitude, longitude);
+  // 진짜 정확하게 나옴;;
 
   weatherSearch(positionObj);
 };

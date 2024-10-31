@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>spread</title>
+  </head>
+  <body>
+    <!-- 하나로 뭉쳐있는 값들의 집합을 전개해주는 연산자 -->
+    <!-- 구조분해할당을 사용하면 배열과 객체의 요소들을 하나하나 손쉽게 
+     복사해줄 수 있었다. 그런데 만약 배열 자체를 복사하고 싶다면 어떻게 해야할까 -->
+    <!-- const arr = [ 1, 2, 3, 4, 5 ];
+         const newArr = arr 
+         이건 같은 주소값을 가지기 때문에 우리가 원하는 것이 아니다.
+    -->
+    <h1 id="spread-test"></h1>
+    <h1 id="spread-test2"></h1>
+    <h1 id="string-spread-test"></h1>
+    <h1 id="newObj-test"></h1>
+    <h1 id="newObj2-test"></h1>
+    <h1 id="copy-test"></h1>
+    <h1 id="copy-test2"></h1>
+    <h1 id="deepcopy-test"></h1>
+
+    <script>
+      const arr = [1, 2, 3, 4, 5];
+      document.querySelector("#spread-test").innerHTML = [...arr];
+
+      const secArr = [6, 7, 8];
+      document.querySelector("#spread-test2").innerHTML = [...arr, ...secArr];
+
+      let str = "Hello";
+      document.querySelector("#string-spread-test").innerHTML = [...str];
+
+      const obj = {
+        name: "otter",
+        gender: "male",
+      };
+      const newObj = { ...obj };
+      document.querySelector("#newObj-test").innerHTML = [
+        newObj.name,
+        newObj.gender,
+      ];
+
+      obj.name = "rabbit";
+      obj.gender = "female";
+      // 중간에 원본 바꾸기
+      document.querySelector("#newObj2-test").innerHTML = [
+        newObj.name,
+        newObj.gender,
+        obj.name,
+        obj.gender,
+      ];
+      // 중간에 원본을 바꿔도 처음 복사된 그대로 출력
+      // 원본 객체와 연결되지 않은 전혀 새로운 객체로 복사된걸 확인
+      // 하지만 완전한 것은 아니다.
+
+      //   const secondObj = {
+      //     name: "otter",
+      //     gender: "male",
+      //     favoriteFood: {
+      //       first: "sushi",
+      //       second: "hamburger",
+      //     },
+      //   };
+      //   const newSecondObj = { ...secondObj };
+
+      //   secondObj.name = "rabbit";
+      //   secondObj.gender = "female";
+      //   secondObj.favoriteFood.first = "cold noodle";
+
+      //   document.querySelector("#newObj2-test").innerHTML = [
+      //     newSecondObj.name,
+      //     newSecondObj.gender,
+      //     newSecondObj.favoriteFood.first,
+      //     newSecondObj.favoriteFood.second,
+      //   ];
+
+      /*
+	    {
+		    name: "otter",
+		    gender: "male",
+	        favoriteFood: {
+			    first: "cold noodle", 다른건 변화하지 않았는데 sushi가 변화하였다
+			    second: "hamburger"
+	        }
+	    }
+            스프레드 연산자를 사용해서 객체의 중괄호를 한번 벗겨냈을 때, 
+            다른 property들은 모두 주소값의 연결이 끊어진채로 새로운 주소를 
+            가진 데이터로 완전히 복사가 되었지만, 이때도 그 내부에 존재하는 
+            favoriteFood 객체는 펼쳐지지 못하여. 같은 주소값을 참고하고 있었기 때문
+        */
+      const secondObj = {
+        name: "otter",
+        gender: "male",
+        favoriteFood: {
+          first: "sushi",
+          second: "hamburger",
+        },
+      };
+
+      const copy = JSON.stringify(secondObj);
+      document.querySelector("#copy-test").innerHTML = [copy];
+      // 위의 예시처럼 문자열로 변환이 된다면, copy에 담긴 값은 더이상 객체가 아니며 완전히
+      // 새로운 문자열이기 때문에 전혀 새로운 주소값을 가지게 됩니다.
+
+      secondObj.name = "rabbit";
+      secondObj.gender = "female";
+      secondObj.favoriteFood.first = "cold noodle";
+      // 원본 파일을 중간에 바꾸었다.
+      // 주소만 복사했으면 원본 그대로 나왔을 것이지만
+
+      const deepCopy = JSON.parse(copy);
+      document.querySelector("#deepcopy-test").innerHTML = [
+        deepCopy.name,
+        deepCopy.gender,
+        deepCopy.favoriteFood.first,
+        deepCopy.favoriteFood.second,
+      ];
+      // 그대로 나온다
+      // 이후, JSON.parse()를 사용해서 JSON 데이터 포맷을 다시 객체 형태로 바꿔주면,
+      // 이때 새로운 객체가 생성되며 deepCopy에 담기는 것이기 때문에 원본 객체와는
+      // 전혀 다른 주소값을 가진 객체가 생성되는 것이죠.
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>destructuring assignment</title>
+  </head>
+  <body>
+    <!-- 구조분해할당 -->
+    <h1 id="arr-test"></h1>
+    <h1 id="obj-test"></h1>
+    <h1 id="obj-keyname-change-test"></h1>
+
+    <script>
+      const arr = [1, 2, 3, 4, 5];
+      let [one, two] = arr;
+      document.querySelector("#arr-test").innerHTML = [one, two];
+
+      const obj = {
+        name: "otter",
+        gender: "male",
+      };
+      let { name, gender } = obj;
+      document.querySelector("#obj-test").innerHTML = [name, gender];
+
+      //key 이름 체인지
+      let { name: newname, gender: newgender } = obj;
+      document.querySelector("#obj-keyname-change-test").innerHTML = [
+        newname,
+        newgender,
+      ];
+    </script>
+  </body>
+</html>
