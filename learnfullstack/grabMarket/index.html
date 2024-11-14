@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GrabMarket</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="header">
@@ -18,50 +19,7 @@
         <img src="images/banners/banner1.png" alt="none" />
       </div>
       <h1>판매되는 상품들</h1>
-      <div id="product-list">
-        <div class="product-card">
-          <div>
-            <img
-              class="product-img"
-              src="images/products/basketball1.jpeg"
-              alt="none"
-            />
-          </div>
-          <div class="product-contents">
-            <span class="product-name">농구공 1호</span>
-            <span class="product-price">50000원</span>
-            <div class="product-seller">
-              <img
-                class="product-avatar"
-                src="images/icons/avatar.png"
-                alt="none"
-              />
-              <span>그랩</span>
-            </div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div>
-            <img
-              class="product-img"
-              src="images/products/keyboard1.jpg"
-              alt="none"
-            />
-          </div>
-          <div class="product-contents">
-            <span class="product-name">키보드 1호</span>
-            <span class="product-price">30000원</span>
-            <div class="product-seller">
-              <img
-                class="product-avatar"
-                src="images/icons/avatar.png"
-                alt="none"
-              />
-              <span>그랩</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="product-list"></div>
     </div>
     <div id="footer"></div>
   </body>

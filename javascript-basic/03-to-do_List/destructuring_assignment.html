@@ -10,6 +10,8 @@
     <h1 id="arr-test"></h1>
     <h1 id="obj-test"></h1>
     <h1 id="obj-keyname-change-test"></h1>
+    <h1 id="test"></h1>
+    <h1 id="test2"></h1>
 
     <script>
       const arr = [1, 2, 3, 4, 5];
@@ -29,6 +31,17 @@
         newname,
         newgender,
       ];
+
+      const grab = {
+        grabname: "그랩",
+        age: 27,
+      };
+      var { grabname, age } = grab;
+      document.querySelector("#test").innerHTML = [grabname, gender];
+      const people = ["민수", "철수"];
+      const [minsoo, chulsoo] = people;
+
+      document.querySelector("#test2").innerHTML = [minsoo, chulsoo];
     </script>
   </body>
 </html>
