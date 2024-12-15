@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>빌딩 가시성 계산기</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>빌딩 가시성 계산기</h2>
+      <form id="building-form">
+        <label for="building-count">빌딩 수:</label>
+        <input
+          type="number"
+          id="building-count"
+          name="building-count"
+          required
+        /><br />
+
+        <label for="building-heights">빌딩 높이 (공백으로 구분):</label>
+        <textarea
+          id="building-heights"
+          name="building-heights"
+          required
+        ></textarea
+        ><br />
+
+        <button type="submit">계산하기</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <script src="./cote.js"></script>
+  </body>
+</html>
