@@ -1,5 +1,3 @@
-/* signup.css */
-
 :root {
   --primary-color: #5a67d8;
   --background-color: #f7fafc;
@@ -22,42 +20,41 @@ div > .container {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 670px;
+  width: 660px; /* << 넓게! */
   max-width: 96vw;
   background: var(--card-background);
-  border: 1.5px solid var(--border-color);
+  border: 2.5px solid var(--border-color);
   box-shadow: 7px 7px 39px var(--shadow-color);
-  border-radius: 20px;
-  padding: 3.5rem 2.5rem;
+  border-radius: 24px;
+  padding: 4rem 3rem; /* << 넓게! */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.2rem; /* << 넓게! */
   align-items: center;
 }
 
 h1 {
   width: 100%;
   text-align: center;
-  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 2.6rem; /* << 크게! */
   color: var(--primary-color);
   margin-bottom: 2.2rem;
   letter-spacing: 1px;
 }
 
-.signup-form {
+.login-form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.7rem;
+  gap: 2rem; /* << 넓게! */
 }
 
 label {
-  font-size: 1.12rem;
+  font-size: 1.15rem; /* << 크게! */
   color: var(--subtle-text-color);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
   font-weight: 500;
   display: block;
 }
@@ -65,13 +62,13 @@ label {
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 1rem 0;
+  padding: 1.1rem 0; /* << 크게! */
   border: none;
-  border-bottom: 1.5px solid #cfcfcf;
+  border-bottom: 2px solid #cfcfcf;
   background: transparent;
-  font-size: 1.18rem;
+  font-size: 1.23rem; /* << 크게! */
   color: var(--text-color);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.7rem;
   transition: border-bottom-color 0.18s;
 }
 
@@ -84,49 +81,62 @@ input[type="password"]:focus {
 .radio-row {
   display: flex;
   align-items: center;
-  gap: 1.3rem;
-  margin-bottom: 1rem;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
 }
 
 input[type="radio"],
 .radio {
-  width: 18px;
-  height: 18px;
+  width: 21px; /* << 크게! */
+  height: 21px; /* << 크게! */
   accent-color: var(--primary-color);
 }
 
-.agree-row {
+.button-row {
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
+  gap: 2rem; /* << 넓게! */
+  justify-content: center;
+  margin-top: 0.7rem;
 }
 
-input[type="checkbox"],
-.agree {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--primary-color);
-}
-
-button {
-  width: 400px;
-  height: 54px;
-  background-color: #ffffff;
-  color: var(--primary-color);
-  border-radius: 8px;
+button,
+.login,
+.registration {
+  min-width: 170px; /* << 넓게! */
+  height: 54px; /* << 크게! */
+  font-size: 1.22rem; /* << 크게! */
+  font-family: inherit;
+  border-radius: 10px;
   border: 2px solid var(--primary-color);
-  font-size: 1.22rem;
-  font-weight: 600;
-  align-self: center;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  align-self: center;
+  background: #fff;
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
-button:hover {
+button.login {
   background: var(--primary-color);
   color: #fff;
   border-color: var(--primary-color);
+}
+
+button.login:hover {
+  background: #434190;
+  color: #fff;
+}
+
+button.registration {
+  background: #fff;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+button.registration:hover {
+  background: #f3f8ff;
+  color: #434190;
+  border-color: #434190;
 }
 
 @media (max-width: 800px) {
@@ -135,15 +145,13 @@ button:hover {
     padding: 2.5rem 1rem;
   }
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
-  button {
-    width: 100%;
-    height: 40px;
-    font-size: 1rem;
-  }
-  input[type="text"],
-  input[type="password"] {
+  button,
+  .login,
+  .registration {
+    min-width: 100px;
+    height: 36px;
     font-size: 1rem;
   }
 }

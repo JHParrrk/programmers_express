@@ -1,0 +1,67 @@
+<!-- class/01-html/03-login.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="./03-login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div>
+      <div class="container">
+        <h1>로그인</h1>
+
+        <form class="login-form" autocomplete="off">
+          <label for="email">이메일</label>
+          <input
+            type="text"
+            class="id"
+            id="email"
+            placeholder="이메일을 입력하세요"
+          />
+
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            class="pw"
+            id="password"
+            placeholder="비밀번호를 입력하세요"
+          />
+
+          <div class="radio-row">
+            <input
+              type="radio"
+              class="radio"
+              name="auto-login"
+              id="auto-login"
+            />
+            <label
+              for="auto-login"
+              style="display: inline; color: #718096; font-size: 1rem"
+              >자동 로그인</label
+            >
+          </div>
+
+          <div class="button-row">
+            <button type="submit" class="login">로그인</button>
+            <button
+              type="button"
+              class="registration"
+              onclick="window.location.href='registration.html'"
+            >
+              회원가입
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="03-login.js"></script>
+  </body>
+</html>
