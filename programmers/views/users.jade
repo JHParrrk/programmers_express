@@ -1,0 +1,66 @@
+extends layout
+
+block content
+  h1= title
+  if users.length
+    table(border="1", cellpadding="5", cellspacing="0")
+      thead
+        tr
+          th ID
+          th UserID
+          th Password
+          th Actions
+      tbody
+        each user in users
+          tr
+            td= user.id
+            td= user.userID
+            td= user.password
+            td
+              // 수정 페이지로 이동하는 링크
+              a(href=`/users/edit/${user.id}`) 수정
+              | 
+              // 삭제 버튼
+              button(onclick=`deleteUser(${user.id})`) 삭제
+  else
+    p No users found.
+
+  h2 User Registration
+  form(action="/users/register", method="post")
+    div
+      label(for="userID") UserID:
+      input(type="text", name="userID", required)
+    div
+      label(for="password") Password:
+      input(type="password", name="password", required)
+    div
+      button(type="submit") Register
+
+  h2 Login
+  form(action="/users/login", method="post")
+    div
+      label(for="userID") UserID:
+      input(type="text", name="userID", required)
+    div
+      label(for="password") Password:
+      input(type="password", name="password", required)
+    div
+      button(type="submit") Login
+  
+  script.
+    function deleteUser(id) {
+        if (confirm('정말로 이 사용자를 삭제하시겠습니까?')) {
+            fetch(`/users/${id}`, {
+                method: 'DELETE',
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('삭제에 실패했습니다.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('삭제 중 오류가 발생했습니다.');
+            });
+        }
+    }

@@ -21,12 +21,12 @@ db.set(1, youtuber1);
 db.set(2, youtuber2);
 
 /* GET youtube page. */
-router.get("/", function (req, res, next) {
-  res.render("youtube", { title: "Express" });
-});
+// router.get("/", function (req, res, next) {
+//   res.render("youtube", { title: "Express" });
+// });
 
 // 전체 유튜버 목록 조회
-router.get("/all", function (req, res, next) {
+router.get("/", function (req, res, next) {
   // Map의 모든 값(value)을 배열로 변환
   const youtubers = Array.from(db.values());
   if (youtubers.length === 0) {
@@ -56,17 +56,45 @@ router.get("/:id", (req, res, next) => {
 
 /* POST test page. */
 router.post("/", function (req, res, next) {
-  // req.body를 활용해서 데이터 처리 가능
-  // 응답은 한 번만 보내야 합니다.
-  const newId = db.size + 1;
-  db.set(newId, req.body);
-  res.json({
-    message: `${req.body.name} 님, 유튜버 생활을 응원합니다. ${newId}번째 유튜버로 등록되었습니다.`,
-    data: req.body,
-  });
+  try {
+    // 1. req.body가 존재하는지, name 등의 필수 값이 있는지 확인
+    if (!req.body || typeof req.body !== "object") {
+      return res
+        .status(400)
+        .json({ message: "요청 데이터가 올바르지 않습니다." });
+    }
+    const { name } = req.body;
+    if (!name || typeof name !== "string") {
+      return res
+        .status(400)
+        .json({ message: "유튜버의 이름(name)이 필요합니다." });
+    }
+    // 2. 새로운 id 생성 및 데이터 저장
+    const newId = db.size + 1;
+    db.set(newId, req.body);
+    // 3. 성공 응답
+    res.json({
+      message: `${name} 님, 유튜버 생활을 응원합니다. ${newId}번째 유튜버로 등록되었습니다.`,
+      data: req.body,
+    });
+  } catch (err) {
+    // 4. 서버 오류 처리
+    next(err);
+  }
 });
 
 /* PUT test page. */
+/*
+1. 입력 데이터 유효성 검사 미흡
+req.body가 없거나, 올바른 객체가 아닐 때의 처리 없음
+필수 필드(name 등)가 누락되었을 때의 처리 없음
+2. 응답 중복 및 next() 호출 위치
+else에서 res.json() 후 next(createError(404))를 호출해서 응답이 두 번 가는 문제가 생길 수 있음
+(Express에서는 응답을 한 번만 보내야 함)
+3. 예상치 못한 오류(try/catch)
+코드 전반에 try/catch가 없어 서버 오류 발생 시 제대로 에러 핸들러로 전달되지 않을 수 있음
+*/
+/* 
 router.put("/:id", (req, res, next) => {
   const id = parseInt(req.params.id); // 1. URL 파라미터(:id)를 정수로 변환
   if (db.has(id)) {
@@ -97,6 +125,48 @@ router.put("/:id", (req, res, next) => {
     next(createError(404));
   }
 });
+*/
+
+/* PUT test page. */
+router.put("/:id", (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    // 1. 요청 body 유효성 검사
+    if (!req.body || typeof req.body !== "object") {
+      return res
+        .status(400)
+        .json({ message: "요청 데이터가 올바르지 않습니다." });
+    }
+    if (!db.has(id)) {
+      // 2. 유튜버 존재하지 않음
+      return res
+        .status(404)
+        .json({ message: `유튜버 ${id}번 정보가 없습니다.` });
+    }
+
+    const oldData = db.get(id);
+    const newData = req.body;
+
+    // 3. 변경된 부분 찾기
+    const changedFields = {};
+    for (const key in newData) {
+      if (oldData[key] !== newData[key]) {
+        changedFields[key] = { before: oldData[key], after: newData[key] };
+      }
+    }
+
+    db.set(id, newData);
+
+    res.json({
+      message: `유튜버 ${id}번 정보가 수정되었습니다.`,
+      changed: changedFields,
+      data: newData,
+    });
+  } catch (err) {
+    next(err); // 4. 서버 오류 처리
+  }
+});
 
 /* DELETE test page. */
 router.delete("/:id", (req, res, next) => {
@@ -120,6 +190,23 @@ router.delete("/", (req, res, next) => {
     res.json({
       message: "모든 유튜버 정보가 삭제되었습니다.",
     });
+  }
+});
+
+// find 함수 사용하는 예시코드  (실제 사용되진 않음)
+router.get("/search/:name", (req, res, next) => {
+  const name = req.params.name;
+  const youtubers = Array.from(db.values()); // Map의 모든 값(value)을 배열로 변환
+  const youtuber = youtubers.find((yt) => yt.name === name); // 이름으로 유튜버 검색
+  if (youtuber) {
+    // 유튜버 정보가 존재하면
+    res.render("youtube", {
+      title: youtuber.name, // 유튜버 이름을 제목으로 설정
+      youtubers: [youtuber], // 유튜버 객체 하나를 배열로 감싼 뒤 youtubers로 전달
+    });
+  } else {
+    // 해당 이름의 유튜버가 없으면
+    next(createError(404, "유튜버를 찾을 수 없습니다.")); // 404 에러로 처리 (Not Found)
   }
 });
 
