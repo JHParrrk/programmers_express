@@ -1,5 +1,8 @@
 extends layout
 
+block head
+  link(rel='stylesheet', href='/stylesheets/user.css')
+
 block content
   h1= title
   if users.length

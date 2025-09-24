@@ -1,0 +1,28 @@
+/* user 페이지에만 적용될 스타일 예시 */
+a {
+  background: #43a047;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 3px;
+  text-decoration: none;
+  margin-right: 6px;
+  border: none;
+  display: inline-block;
+}
+
+a:hover {
+  background: #388e3c;
+}
+
+button {
+  background: #ff7043;
+  color: #fff;
+  padding: 7px 15px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d84315;
+}

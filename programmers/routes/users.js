@@ -9,6 +9,14 @@ let users = [
   { id: 3, userID: "ckffl789", password: "pwd789" },
 ];
 
+// const user = {
+//   name: "Alice",
+//   age: 28,
+//   job: "developer"
+// };
+// // 값이 아니라 키(속성 이름) 만 배열로 가져옵니다.
+// console.log(Object.keys(user)); // ["name", "age", "job"]
+
 // 전체 회원 조회
 router.get("/", (req, res) => {
   res.status(200).render("users", { title: "Users", users });
