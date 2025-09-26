@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+
+  // 전체 채널 목록
+  if channels && channels.length > 0
+    ul
+      each channel in channels
+        li
+          h3= channel.channel_title
+          p 구독자: #{channel.subscribers}
+          p 설명: #{channel.description}
+  else
+    p 등록된 채널이 없습니다.
+
+  // 새 채널 등록 폼
+  h2 새 채널 등록
+  form(action="/" method="POST")
+    label(for="channel_title") 채널 이름:
+    input(type="text" name="channel_title" id="channel_title" required)
+    label(for="subscribers") 구독자 수:
+    input(type="number" name="subscribers" id="subscribers" required)
+    label(for="description") 설명:
+    input(type="text" name="description" id="description" required)
+    button(type="submit") 채널 등록

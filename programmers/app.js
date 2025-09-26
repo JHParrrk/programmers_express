@@ -4,10 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+// 라우터 모듈 불러오기
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var youtubeRouter = require("./routes/youtube");
+var youtubeRouter = require("./routes/channels");
 
+// 익스프레스 앱 생성
 var app = express();
 
 // view engine setup
@@ -32,9 +34,10 @@ app.use(express.static(path.join(__dirname, "public")));
 //   next(); // 다음 미들웨어로 넘김
 // }
 
+// 라우터 설정
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/youtube", youtubeRouter);
+app.use("/channels", youtubeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
