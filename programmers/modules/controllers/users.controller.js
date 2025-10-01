@@ -2,15 +2,15 @@ const createError = require("http-errors");
 const userService = require("../services/users.service");
 const { generateToken } = require("../../utils/auth");
 const { body, param } = require("express-validator");
-const validate = require("../utils/validate"); // validate 미들웨어 가져오기
+const validate = require("../../utils/validate"); // validate 미들웨어 가져오기
 
 // 회원가입 컨트롤러
 exports.register = [
   // 입력값 검증
   body("email").isEmail().withMessage("유효한 이메일 주소를 입력하세요."), // 이메일 형식 검증
   body("password")
-    .isLength({ min: 6 })
-    .withMessage("비밀번호는 최소 6자 이상이어야 합니다."), // 비밀번호 최소 길이 검증
+    .isLength({ min: 4 })
+    .withMessage("비밀번호는 최소 4자 이상이어야 합니다."), // 비밀번호 최소 길이 검증
   body("name").notEmpty().withMessage("이름을 입력하세요."), // 이름 필수 입력 검증
   body("contacts")
     .matches(/^\d{3}-\d{3,4}-\d{4}$/)
