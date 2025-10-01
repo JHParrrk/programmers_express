@@ -1,21 +1,11 @@
+// programmers/modules/controllers/users.controller.js
+
 const createError = require("http-errors");
 const userService = require("../services/users.service");
 const { generateToken } = require("../../utils/auth");
-const { body, param } = require("express-validator");
-const validate = require("../../utils/validate"); // validate 미들웨어 가져오기
 
 // 회원가입 컨트롤러
 exports.register = [
-  // 입력값 검증
-  body("email").isEmail().withMessage("유효한 이메일 주소를 입력하세요."), // 이메일 형식 검증
-  body("password")
-    .isLength({ min: 4 })
-    .withMessage("비밀번호는 최소 4자 이상이어야 합니다."), // 비밀번호 최소 길이 검증
-  body("name").notEmpty().withMessage("이름을 입력하세요."), // 이름 필수 입력 검증
-  body("contacts")
-    .matches(/^\d{3}-\d{3,4}-\d{4}$/)
-    .withMessage("유효한 연락처를 입력하세요."), // 연락처 형식 검증
-  validate, // validate 미들웨어 적용 (검증 결과 처리)
   async (req, res, next) => {
     try {
       const { email, name, password, contacts } = req.body;
@@ -42,9 +32,6 @@ exports.register = [
 
 // 로그인 컨트롤러
 exports.login = [
-  body("email").isEmail().withMessage("유효한 이메일 주소를 입력하세요."), // 이메일 형식 검증
-  body("password").notEmpty().withMessage("비밀번호를 입력하세요."), // 비밀번호 필수 입력 검증
-  validate, // validate 미들웨어 적용 (검증 결과 처리)
   async (req, res, next) => {
     try {
       const { email, password } = req.body;
@@ -93,8 +80,6 @@ exports.getAllUsers = async (req, res, next) => {
 
 // 특정 사용자 조회 컨트롤러
 exports.getUserById = [
-  param("id").isInt().withMessage("유효한 사용자 ID를 입력하세요."), // 사용자 ID 형식 검증
-  validate, // validate 미들웨어 적용
   async (req, res, next) => {
     try {
       const id = parseInt(req.params.id, 10); // 요청 URL에서 사용자 ID 추출
@@ -118,17 +103,6 @@ exports.getUserById = [
 
 // 사용자 업데이트 컨트롤러
 exports.updateUser = [
-  param("id").isInt().withMessage("유효한 사용자 ID를 입력하세요."), // 사용자 ID 형식 검증
-  body("password")
-    .optional()
-    .isLength({ min: 6 })
-    .withMessage("비밀번호는 최소 6자 이상이어야 합니다."), // 비밀번호 형식 검증
-  body("name").optional().notEmpty().withMessage("이름을 입력하세요."), // 이름 필수 입력 검증
-  body("contacts")
-    .optional()
-    .matches(/^\d{3}-\d{3,4}-\d{4}$/)
-    .withMessage("유효한 연락처를 입력하세요."), // 연락처 형식 검증
-  validate, // validate 미들웨어 적용
   async (req, res, next) => {
     try {
       const id = parseInt(req.params.id, 10); // 요청 URL에서 사용자 ID 추출
@@ -161,8 +135,6 @@ exports.updateUser = [
 
 // 사용자 삭제 컨트롤러
 exports.deleteUser = [
-  param("id").isInt().withMessage("유효한 사용자 ID를 입력하세요."), // 사용자 ID 형식 검증
-  validate, // validate 미들웨어 적용
   async (req, res, next) => {
     try {
       const id = parseInt(req.params.id, 10); // 요청 URL에서 사용자 ID 추출
