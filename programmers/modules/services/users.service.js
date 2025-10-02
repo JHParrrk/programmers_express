@@ -84,12 +84,14 @@ exports.saveRefreshToken = async (userId, token) => {
 
   // 동일한 사용자에 대한 기존 토큰이 있다면 덮어쓰기(UPSERT)
   // expires_at 컬럼을 추가하여 만료 시간도 함께 저장합니다.
+  const createdAt = new Date(); // 현재 시간 추가
+
   const sql = `
-    INSERT INTO refresh_tokens (user_id, token, expires_at)
-    VALUES (?, ?, ?)
-    ON DUPLICATE KEY UPDATE token = VALUES(token), expires_at = VALUES(expires_at)
+    INSERT INTO refresh_tokens (user_id, token, expires_at, created_at)
+    VALUES (?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE token = VALUES(token), expires_at = VALUES(expires_at), created_at = VALUES(created_at)
   `;
-  await dbPool.query(sql, [userId, token, expiresAt]);
+  await dbPool.query(sql, [userId, token, expiresAt, createdAt]);
 };
 
 // 리프레시 토큰 조회 함수
