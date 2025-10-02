@@ -1,3 +1,5 @@
+// app.js
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -8,6 +10,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var youtubeRouter = require("./routes/channels");
+const { errorHandler } = require("./utils/errorHandler");
 
 // 익스프레스 앱 생성
 var app = express();
@@ -27,6 +30,8 @@ app.use(cookieParser());
 // → 요청의 쿠키를 쉽게 쓸 수 있도록 req.cookies에 객체로 넣어줌
 app.use(express.static(path.join(__dirname, "public")));
 // → public 폴더 안의 파일을 정적 파일(이미지, CSS 등)로 제공
+app.use(errorHandler);
+// 에러 핸들러 등록
 
 // 커스텀 미들웨어 예시
 // function (req, res, next) {

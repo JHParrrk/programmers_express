@@ -1,4 +1,4 @@
-// programmers/routes/users.js
+// routes/users.js
 
 const express = require("express");
 const router = express.Router();
@@ -79,5 +79,11 @@ router
     ],
     userController.deleteUser
   );
+
+// 리프레시 토큰으로 새 액세스 토큰 발급
+router.post("/refresh-token", userController.refreshAccessToken);
+
+// 로그아웃
+router.post("/logout", userController.logout);
 
 module.exports = router;
